@@ -1,6 +1,8 @@
 import { join } from 'path';
 import { existsSync, mkdirSync, readdirSync, copyFileSync } from 'fs';
 import sharp from 'sharp';
+import { config } from 'dotenv';
+config();
 
 export const convertData2YoloCls = async function(inputDir, outputDir) {
     return new Promise(async function(resolve, reject) {
@@ -55,7 +57,7 @@ export const convertData2YoloCls = async function(inputDir, outputDir) {
                     const destPath = join(outputDir, dir.name, item, _item.name);
                     //copyFileSync(_item.path, destPath);
                     try {
-                        await sharp(_item.path).resize(64).toFile(destPath);
+                        await sharp(_item.path).resize(process.env.IMAGE_RESIZE || 64).toFile(destPath);
                     }catch(err) {
                         console.error(err);
                     }
