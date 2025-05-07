@@ -57,7 +57,7 @@ export const convertData2YoloCls = async function(inputDir, outputDir) {
                     const destPath = join(outputDir, dir.name, item, _item.name);
                     //copyFileSync(_item.path, destPath);
                     try {
-                        await sharp(_item.path).resize(process.env.IMAGE_RESIZE || 64).toFile(destPath);
+                        await sharp(_item.path).resize(parseInt(process.env.IMAGE_RESIZE || 64)).toFile(destPath);
                     }catch(err) {
                         console.error(err);
                     }
